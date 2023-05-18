@@ -1,23 +1,13 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Update TODO
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or workflow_dispatch request events
   push:
-    paths:
-    - "**.gml"
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
   contents: write
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job
   generate-todo:
     runs-on: [self-hosted, linux]
     steps:
@@ -26,9 +16,11 @@ jobs:
         
       - name: Create TODO.md
         run: |
-         echo This does not do much yet...
+          curl https://raw.githubusercontent.com/hoverAdev/actions/main/generate-todo/todo.py
+          python todo.py
         
-      - name: Push changes
+      - name: Commit and push changes
         run: |
+          git commit -m "Update TODO.md"
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}/
           
