@@ -1,0 +1,8 @@
+on: [push, workflow_dispatch]
+jobs:
+  generate-todo:
+    name: generate-todo
+    runs-on: [self-hosted, linux]
+    steps:
+      - run: |
+          echo hello
