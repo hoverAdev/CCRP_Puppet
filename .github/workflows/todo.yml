@@ -1,4 +1,4 @@
-name: Update TODO.md
+name: Update TODO
 
 on:
   push:
@@ -11,19 +11,21 @@ permissions:
 
 jobs:
   generate-todo:
-    runs-on: [self-hosted, linux]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      
+      - name: Set origin to GITHUB_TOKEN
+         run: git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         
       - name: Create TODO.md
         run: |
-          git remote set-url origin  https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           curl -O https://raw.githubusercontent.com/hoverAdev/actions/main/generate-todo/todo.py
           python3 todo.py
         
       - name: Commit and push changes
         run: |
           git commit -a -m "Update TODO.md"
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}/
+          git push
           
