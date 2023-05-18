@@ -23,6 +23,6 @@ jobs:
         
       - name: Commit and push changes
         run: |
-          git commit -m "Update TODO.md"
+          git commit -a -m "Update TODO.md"
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}/
           
