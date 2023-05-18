@@ -26,7 +26,7 @@ jobs:
         
       - name: Create TODO.md
         run: |
-         echo This doesn't do much yet...
+         echo This does not do much yet...
         
       - name: Push changes
         run: |
