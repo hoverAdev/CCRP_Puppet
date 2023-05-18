@@ -1,8 +1,17 @@
-on: [push, workflow_dispatch]
+on: 
+  workflow_dispatch:
+  push:
+      paths:
+      - "**.gml"
 jobs:
   generate-todo:
     name: generate-todo
     runs-on: [self-hosted, linux]
     steps:
       - run: |
-          ls
+          cd /home/thor/puppet
+          git pull
+          rm TODO.md
+          for d in ./*/*/*.gml ; do (cat $d | grep -n TODO && echo in file $d) >> TODO.md; done
+          git commit -m "Update TODO.md"
+          git push
