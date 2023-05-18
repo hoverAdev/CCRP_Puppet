@@ -2,6 +2,8 @@ name: Update TODO
 
 on:
   push:
+    paths-ignore: 
+      - "**.md"
   workflow_dispatch:
 
 permissions:
