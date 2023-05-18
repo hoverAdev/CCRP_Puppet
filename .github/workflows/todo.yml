@@ -27,6 +27,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions"
           git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git commit -a -m "Update TODO.md"
+          git add TODO.md
+          git commit -m "Update TODO.md"
           git push
           
